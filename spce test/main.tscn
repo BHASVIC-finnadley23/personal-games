@@ -1,0 +1,68 @@
+[gd_scene load_steps=7 format=3 uid="uid://cv4qp64wa3ste"]
+
+[ext_resource type="Script" path="res://Block.gd" id="1_rfjyd"]
+[ext_resource type="Script" path="res://thruster.gd" id="1_sdpls"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_501e3"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_cl772"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vg8bl"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_5julq"]
+
+[node name="Node" type="Node"]
+
+[node name="Main" type="Node3D" parent="."]
+
+[node name="Block" type="RigidBody3D" parent="Main"]
+transform = Transform3D(1.01275, 0, 0, 0, 1.00373, 0, 0, 0, 1.00373, 3.18314, 2.73471, 0)
+mass = 5.26
+script = ExtResource("1_rfjyd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Main/Block"]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_501e3")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Main/Block"]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_cl772")
+
+[node name="Floor" type="StaticBody3D" parent="Main"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Main/Floor"]
+transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 0, 0)
+shape = SubResource("BoxShape3D_vg8bl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Main/Floor"]
+transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 0, 0)
+mesh = SubResource("BoxMesh_5julq")
+
+[node name="Thruster" type="RigidBody3D" parent="Main"]
+transform = Transform3D(1.01275, 0, 0, 0, 1.00373, 0, 0, 0, 1.00373, 0, 2.73471, 0)
+mass = 5.26
+script = ExtResource("1_sdpls")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Main/Thruster"]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_501e3")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Main/Thruster"]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_cl772")
+
+[node name="Rocket" type="Node3D" parent="Main"]
+
+[node name="Camera3D" type="Camera3D" parent="Main/Rocket"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.70318, 7.64687)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Main/Rocket/Camera3D"]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, -0.600908)
+light_energy = 6.98
+light_indirect_energy = 1.445
+light_volumetric_fog_energy = 14.091
+light_size = 0.61
+light_specular = 0.69
+spot_range = 10.5709
